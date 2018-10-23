@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Lokaler">
+
+
+
+    <SearchView
+        android:id="@+id/LoaklerSearchView"
+        android:layout_width="368dp"
+        android:layout_height="56dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="56dp" />
+
+    <TextView
+        android:id="@+id/LokalerTitle"
+        android:layout_width="180dp"
+        android:layout_height="40dp"
+        android:text="Lokaler"
+        tools:layout_editor_absoluteX="102dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <ListView
+        android:id="@+id/LokalerListView"
+        android:layout_width="368dp"
+        android:layout_height="383dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="120dp" />
+</LinearLayout>
