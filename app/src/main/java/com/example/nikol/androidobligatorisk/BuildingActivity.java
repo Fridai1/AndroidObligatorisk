@@ -70,7 +70,7 @@ private class GetBuildingsTask extends AsyncTask<String, Void, String> {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getBaseContext(), LokalerActivity.class);
                 Building building = (Building) parent.getItemAtPosition(position);
-                getIntent().putExtra("BUILDING",building);
+                intent.putExtra("BUILDING",building);
                 startActivity(intent);
             }
         });

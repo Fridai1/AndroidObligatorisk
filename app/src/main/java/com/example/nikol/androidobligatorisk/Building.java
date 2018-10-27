@@ -5,16 +5,16 @@ import java.io.Serializable;
 public class Building implements Serializable {
     private int id;
 
-    public Building(int id, String name, int cityId, String adresse) {
+    public Building(int id, String name, int cityId, String address) {
         this.id = id;
         this.name = name;
         this.cityId = cityId;
-        this.adresse = adresse;
+        this.address = address;
     }
 
     private String name;
     private int cityId;
-    private String adresse;
+    private String address;
 
     public int getId() {
         return id;
@@ -41,16 +41,16 @@ public class Building implements Serializable {
     }
 
     public String getAdresse() {
-        return adresse;
+        return address;
     }
 
     public void setAdresse(String adresse) {
-        this.adresse = adresse;
+        this.address = address;
     }
 
 
     @Override
     public String toString() {
-        return name;
+        return "Bygning " + name + " på " + address;
     }
 }
