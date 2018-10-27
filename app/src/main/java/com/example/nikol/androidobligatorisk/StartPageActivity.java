@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class StartPage extends AppCompatActivity {
+public class StartPageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class StartPage extends AppCompatActivity {
     }
 
     public void ToLokaler(View view) {
-        Intent intent = new Intent(getBaseContext(), Lokaler.class);
+        Intent intent = new Intent(getBaseContext(),BuildingActivity.class);
         startActivity(intent);
     }
 }
