@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "174187303083",
+    "firebase_url": "https://androidobligatoriskopgave.firebaseio.com",
+    "project_id": "androidobligatoriskopgave",
+    "storage_bucket": "androidobligatoriskopgave.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:174187303083:android:855959c4990e98aa",
+        "android_client_info": {
+          "package_name": "com.example.nikol.androidobligatorisk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "174187303083-ioh7grb53ltngvtj3qgibkp7gpp06aas.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKDIrv7rJerJIvWugAufY1n6hd_zcSgWU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
