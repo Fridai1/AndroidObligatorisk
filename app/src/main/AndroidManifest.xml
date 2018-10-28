@@ -28,7 +28,9 @@
         <activity android:name=".RoomsActivity" />
         <activity android:name=".BuildingActivity" />
         <activity android:name=".RoomActivity" />
-        <activity android:name=".ReservationActivity"></activity>
+        <activity android:name=".ReservationActivity" />
+        <activity android:name=".CalenderActivity" />
+        <activity android:name=".LoggedInActivity"></activity>
     </application>
 
 </manifest>
