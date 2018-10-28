@@ -1,6 +1,8 @@
 package com.example.nikol.androidobligatorisk;
 
-public class Reservation {
+import java.io.Serializable;
+
+public class Reservation implements Serializable {
         private String fromTimeString;
         private String toTimeString;
         private String userId;
@@ -56,5 +58,8 @@ public class Reservation {
                 this.roomId = roomId;
         }
 
-
+    @Override
+    public String toString() {
+        return "Reserved from " + fromTimeString + " to " + toTimeString;
+    }
 }

@@ -1,6 +1,5 @@
 package com.example.nikol.androidobligatorisk;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -68,7 +67,7 @@ private class GetBuildingsTask extends AsyncTask<String, Void, String> {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getBaseContext(), LokalerActivity.class);
+                Intent intent = new Intent(getBaseContext(), RoomsActivity.class);
                 Building building = (Building) parent.getItemAtPosition(position);
                 intent.putExtra("BUILDING",building);
                 startActivity(intent);

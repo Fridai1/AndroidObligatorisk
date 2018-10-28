@@ -18,4 +18,10 @@
     <string name="Building_overview">Building</string>
     <string name="Login_button">Login</string>
     <string name="To_Buildings_Button">Buildings</string>
+    <string name="UserId">UserId:</string>
+    <string name="FromTime">Reserved from:</string>
+    <string name="ToTime">Reserved to:</string>
+    <string name="Purpose">Purpose:</string>
+
+
 </resources>

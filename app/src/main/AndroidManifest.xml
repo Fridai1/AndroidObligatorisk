@@ -25,9 +25,10 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".LokalerActivity" />
+        <activity android:name=".RoomsActivity" />
         <activity android:name=".BuildingActivity" />
-        <activity android:name=".RoomActivity"></activity>
+        <activity android:name=".RoomActivity" />
+        <activity android:name=".ReservationActivity"></activity>
     </application>
 
 </manifest>
