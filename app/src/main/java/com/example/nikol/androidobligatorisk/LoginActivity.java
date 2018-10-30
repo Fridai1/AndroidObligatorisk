@@ -10,22 +10,17 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
+
 
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
+
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -62,9 +57,11 @@ public class LoginActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView =  findViewById(R.id.email);
+        loginButton = findViewById(R.id.email_sign_in_button);
 
-loginButton = findViewById(R.id.email_sign_in_button);
+        Toolbar myToolbar = findViewById(R.id.LoginToolBar);
+        setSupportActionBar(myToolbar);
 
 // ...
 // Initialize Firebase Auth
@@ -142,6 +139,7 @@ loginButton = findViewById(R.id.email_sign_in_button);
 
     private void StartLogin()
     {
+
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
         mAuth.signInWithEmailAndPassword(email, password)

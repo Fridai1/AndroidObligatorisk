@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:orientation="vertical"
-    android:padding="20dp"
     tools:context=".StartPageActivity">
+
+    <include layout="@layout/toolbar_main"
+        android:id="@+id/StartToolBar"/>
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -37,7 +40,7 @@
             android:id="@+id/ButtonLokaler"
             android:layout_width="158dp"
             android:layout_height="79dp"
-            android:onClick="ToLokaler"
+            android:onClick="ToBuildings"
             android:text="@string/To_Buildings_Button" />
     </LinearLayout>
 
