@@ -13,6 +13,7 @@ public class ReservationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reservation);
         thisReservation = (Reservation) getIntent().getExtras().get("RESERVATION");
 
+
         TextView userId = findViewById(R.id.UserIdRes);
         TextView fromTime = findViewById(R.id.FromTimeRes);
         TextView toTime = findViewById(R.id.ToTimeRes);

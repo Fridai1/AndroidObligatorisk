@@ -3,6 +3,7 @@ package com.example.nikol.androidobligatorisk;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -20,6 +21,8 @@ public class LoggedInActivity extends AppCompatActivity {
         TextView LoggedInUser = findViewById(R.id.LoggedInAs);
         LoggedInUser.setText(user.getEmail());
 
+        Toolbar myToolbar = findViewById(R.id.StartToolBar);
+        setSupportActionBar(myToolbar);
     }
 
     public void ToBuildings(View view) {

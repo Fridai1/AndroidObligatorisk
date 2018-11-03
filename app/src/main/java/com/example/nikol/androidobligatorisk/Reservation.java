@@ -7,7 +7,18 @@ public class Reservation implements Serializable {
         private String toTimeString;
         private String userId;
         private String purpose;
+        private String[] date;
         private int roomId;
+
+
+    public String getDate() {
+       date = fromTimeString.split(" ");
+        String justDate = date[0];
+        return justDate;
+    }
+
+
+
 
     public String getFromTimeString() {
         return fromTimeString;
@@ -48,6 +59,8 @@ public class Reservation implements Serializable {
     public void setRoomId(int roomId) {
         this.roomId = roomId;
     }
+
+
 
     Reservation(String fromTimeString, String toTimeString, String userId, String purpose, int roomId)
         {

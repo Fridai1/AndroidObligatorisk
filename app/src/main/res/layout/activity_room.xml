@@ -7,6 +7,9 @@
     tools:context=".RoomActivity"
     android:orientation="vertical">
 
+    <include layout="@layout/toolbar_main"
+        android:id="@+id/StartToolBar"/>
+
     <TextView
         android:id="@+id/RoomName"
         android:layout_width="wrap_content"
