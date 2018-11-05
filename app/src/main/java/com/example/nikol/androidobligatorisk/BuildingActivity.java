@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 
+import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -23,13 +24,14 @@ import okhttp3.Response;
 
 public class BuildingActivity extends AppCompatActivity {
 
+    FirebaseUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_building);
         Toolbar myToolbar = findViewById(R.id.StartToolBar);
         setSupportActionBar(myToolbar);
-
+        user = (FirebaseUser) getIntent().getExtras().get("USER");
         GetBuildingsTask task = new GetBuildingsTask();
         task.execute("https://anbo-roomreservation.azurewebsites.net/api/buildings");
 
@@ -73,6 +75,7 @@ private class GetBuildingsTask extends AsyncTask<String, Void, String> {
                 Intent intent = new Intent(getBaseContext(), RoomsActivity.class);
                 Building building = (Building) parent.getItemAtPosition(position);
                 intent.putExtra("BUILDING",building);
+                intent.putExtra("USER", user);
                 startActivity(intent);
             }
         });

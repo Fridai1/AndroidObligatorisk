@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -29,6 +30,7 @@ import okhttp3.Response;
 
 public class RoomsActivity extends AppCompatActivity {
 
+    FirebaseUser user;
     public static Building building;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class RoomsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rooms);
         Toolbar myToolbar = findViewById(R.id.StartToolBar);
         setSupportActionBar(myToolbar);
+        user = (FirebaseUser) getIntent().getExtras().get("USER");
         building = (com.example.nikol.androidobligatorisk.Building) getIntent().getExtras().get("BUILDING");
         GetRoomTask task = new GetRoomTask();
         task.execute("https://anbo-roomreservation.azurewebsites.net/api/rooms");
@@ -56,6 +59,7 @@ public class RoomsActivity extends AppCompatActivity {
             intent.putExtra("DAY", day);
             intent.putExtra("MONTH", month +1);
             intent.putExtra("YEAR", _year);
+            intent.putExtra("USER",user);
             startActivity(intent);
 
         }

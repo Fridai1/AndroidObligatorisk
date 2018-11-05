@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,12 +35,13 @@ public static Room room;
 int day;
 int month;
 int year;
+FirebaseUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
         room = (Room) getIntent().getExtras().get("ROOM");
-        FirebaseUser user =(FirebaseUser) getIntent().getExtras().get("USER");
+        user =(FirebaseUser) getIntent().getExtras().get("USER");
         day =(int) getIntent().getExtras().get("DAY");
         month =(int) getIntent().getExtras().get("MONTH");
         year =(int) getIntent().getExtras().get("YEAR");
@@ -52,7 +54,7 @@ int year;
         String YearsS = String.valueOf(year);
 
 
-        String dateSelected = YearsS+"-"+dayS+"-"+MonthS;
+        String dateSelected = YearsS+"-"+MonthS+"-"+dayS;
 
         TextView TextName = findViewById(R.id.RoomName);
         TextName.setText(room.getName());
@@ -60,8 +62,24 @@ int year;
 
         GetReservationTask task = new GetReservationTask();
         String URI = MessageFormat.format("https://anbo-roomreservation.azurewebsites.net/api/reservations/room/{0}/date/{1}",roomSelected,dateSelected);
-        task.execute(URI);
 
+        task.execute(URI);
+        Button ToReservation = findViewById(R.id.MakeReservation);
+        if (user == null)
+            ToReservation.setVisibility(View.GONE);
+
+
+
+    }
+
+    public void MakeReservation(View view) {
+        Intent intent = new Intent(getBaseContext(), MakeReservationActivity.class);
+        intent.putExtra("USER", user);
+        intent.putExtra("DAY",day);
+        intent.putExtra("MONTH",month);
+        intent.putExtra("YEAR",year);
+        intent.putExtra("ROOM",room);
+        startActivity(intent);
 
     }
 
@@ -91,6 +109,8 @@ int year;
             Gson gson = new GsonBuilder().create();
             final Reservation[] reservations = gson.fromJson(JsonString, Reservation[].class);
             ListView alistView = findViewById(R.id.RoomListView);
+
+
            /* String dayS = String.valueOf(day);
             String MonthS = String.valueOf(month);
             String YearsS = String.valueOf(year);
@@ -126,4 +146,7 @@ int year;
             });
         }
     }
+
+
+
 }

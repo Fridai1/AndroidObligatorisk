@@ -10,6 +10,13 @@
     <include layout="@layout/toolbar_main"
         android:id="@+id/StartToolBar"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="MakeReservation"
+        android:id="@+id/MakeReservation"
+        android:text="@string/Make_Reservation"/>
+
     <TextView
         android:id="@+id/RoomName"
         android:layout_width="wrap_content"

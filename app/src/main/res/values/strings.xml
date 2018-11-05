@@ -35,8 +35,11 @@
     <string name="last_date">30</string>
     <string name="Sign_out">Sign Out</string>
     <string name="LoggedInAs">Logged in as:</string>
-    <string name="AvailableRooms">Available Rooms</string>
+    <string name="AvailableRooms">Existing Reservations</string>
     <string name="Reservations">Reservations</string>
+    <string name="Make_Reservation">Make Reservation</string>
+    <string name="Reserve">Reserve</string>
+    <string name="ToMyReservations">My Reservations</string>
 
 
 </resources>

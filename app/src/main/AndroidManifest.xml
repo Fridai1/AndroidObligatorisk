@@ -25,16 +25,20 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".RoomsActivity"
-            android:label="Rooms"/>
+        <activity
+            android:name=".RoomsActivity"
+            android:label="Rooms" />
         <activity android:name=".BuildingActivity" />
-        <activity android:name=".RoomActivity"
-            android:label="@string/AvailableRooms"/>
-        <activity android:name=".ReservationActivity"
-            android:label="@string/Reservations"/>
+        <activity
+            android:name=".RoomActivity"
+            android:label="@string/AvailableRooms" />
+        <activity
+            android:name=".ReservationActivity"
+            android:label="@string/Reservations" />
         <activity android:name=".LoggedInActivity" />
         <activity android:name=".SignOutActivity" />
         <activity android:name=".MyReservationActivity" />
+        <activity android:name=".MakeReservationActivity"></activity>
     </application>
 
 </manifest>
