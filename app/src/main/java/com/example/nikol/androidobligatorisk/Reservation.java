@@ -8,7 +8,17 @@ public class Reservation implements Serializable {
         private String userId;
         private String purpose;
         private String[] date;
-        private int roomId;
+        private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    private int roomId;
 
 
     public String getDate() {

@@ -141,6 +141,7 @@ FirebaseUser user;
                     Intent intent = new Intent(getBaseContext(), ReservationActivity.class);
                     Reservation reservation = (Reservation) parent.getItemAtPosition(position);
                     intent.putExtra("RESERVATION",reservation);
+                    intent.putExtra("USER",user);
                     startActivity(intent);
                 }
             });

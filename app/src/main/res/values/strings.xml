@@ -40,6 +40,7 @@
     <string name="Make_Reservation">Make Reservation</string>
     <string name="Reserve">Reserve</string>
     <string name="ToMyReservations">My Reservations</string>
+    <string name="DeleteBtn">Delete</string>
 
 
 </resources>

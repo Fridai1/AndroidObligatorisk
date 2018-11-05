@@ -29,7 +29,8 @@ public class BuildingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_building);
-        Toolbar myToolbar = findViewById(R.id.StartToolBar);
+
+        Toolbar myToolbar = findViewById(R.id.BuildingToolBar);
         setSupportActionBar(myToolbar);
         user = (FirebaseUser) getIntent().getExtras().get("USER");
         GetBuildingsTask task = new GetBuildingsTask();

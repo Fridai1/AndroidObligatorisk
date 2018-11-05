@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <include layout="@layout/toolbar_main"
-        android:id="@+id/StartToolBar"/>
+        android:id="@+id/BuildingToolBar"/>
 
     <ListView
         android:layout_width="match_parent"
