@@ -6,6 +6,8 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,6 +39,43 @@ public class MyReservationActivity extends AppCompatActivity {
        task.execute(uri);
 
 
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        if (user == null)
+        {
+            MenuItem item = menu.findItem(R.id.Signout);
+            item.setVisible(false);
+        }
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.Signout:
+                Intent intent = new Intent(getBaseContext(), SignOutActivity.class);
+                intent.putExtra("USER",user);
+                startActivity(intent);
+            case R.id.ToStart:
+                if (user != null)
+                {
+                    Intent intent1 = new Intent(getBaseContext(), LoggedInActivity.class);
+                    intent1.putExtra("USER", user);
+                    startActivity(intent1);
+                }
+                else{
+                    Intent intent2 = new Intent(getBaseContext(),StartPageActivity.class);
+                    intent2.putExtra("USER", user);
+                    startActivity(intent2);
+                }
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private class GetMyResTask extends AsyncTask<String, Void, String> {

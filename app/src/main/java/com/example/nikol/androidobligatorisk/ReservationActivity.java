@@ -2,9 +2,15 @@ package com.example.nikol.androidobligatorisk;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -26,14 +32,19 @@ public class ReservationActivity extends AppCompatActivity {
     FirebaseUser user;
     DeleteResTask task;
     String uri;
+    private GestureDetectorCompat mDetector;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
+        Toolbar myToolbar = findViewById(R.id.ReservationToolbar);
+        setSupportActionBar(myToolbar);
         thisReservation = (Reservation) getIntent().getExtras().get("RESERVATION");
         user = (FirebaseUser) getIntent().getExtras().get("USER");
         Button deleteBTN = findViewById(R.id.DeleteBtn);
 
+        mDetector = new GestureDetectorCompat(this, new MyGestureListener());
 
 
 
@@ -46,6 +57,7 @@ public class ReservationActivity extends AppCompatActivity {
         fromTime.setText(thisReservation.getFromTimeString());
         toTime.setText(thisReservation.getToTimeString());
         purpose.setText(thisReservation.getPurpose());
+
         String loggedInUserId = "";
 
         if (user != null)
@@ -58,8 +70,9 @@ public class ReservationActivity extends AppCompatActivity {
         // den er jo HELT gal her, hvis jeg sætte den til at gå ind hvis de er lig med hinanden går den ikke ind på trods af at de er
         // hvis jeg siger du skal gå hvis i ikke er lig hinanden gå den ind på trods af at de er lig med hinande.. så jeg bytter om på
         // skjul og hvis metoden.. det giver ingen mening..
+
         deleteBTN.setVisibility(View.GONE);
-        if (loggedInUserId == reservationUserId )
+        if (loggedInUserId.equals(reservationUserId) )
         {
             deleteBTN.setVisibility(View.VISIBLE);
         }
@@ -68,11 +81,66 @@ public class ReservationActivity extends AppCompatActivity {
          uri = "https://anbo-roomreservation.azurewebsites.net/api/reservations/";
 
     }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        if (user == null)
+        {
+            MenuItem item = menu.findItem(R.id.Signout);
+            item.setVisible(false);
+        }
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.Signout:
+                Intent intent = new Intent(getBaseContext(), SignOutActivity.class);
+                intent.putExtra("USER",user);
+                startActivity(intent);
+            case R.id.ToStart:
+                if (user != null)
+                {
+                    Intent intent1 = new Intent(getBaseContext(), LoggedInActivity.class);
+                    intent1.putExtra("USER", user);
+                    startActivity(intent1);
+                }
+                else{
+                    Intent intent2 = new Intent(getBaseContext(),StartPageActivity.class);
+                    intent2.putExtra("USER", user);
+                    startActivity(intent2);
+                }
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 
     public void DeleteRes(View view) {
-    task.execute("uri");
+    task.execute();
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        this.mDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
+    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+        private static final String DEBUG_TAG = "Gestures";
+
+        @Override
+        public boolean onFling(MotionEvent event1, MotionEvent event2,
+                               float velocityX, float velocityY) {
+            Log.d(DEBUG_TAG, "onFling: " + event1.toString() + event2.toString());
+            finish();
+            return true;
+        }
+    }
+
 
 
     private class DeleteResTask extends AsyncTask<String, Void, String> {
@@ -89,12 +157,12 @@ public class ReservationActivity extends AppCompatActivity {
                 try{
                     OkHttpClient client = new OkHttpClient.Builder().build();
                     Response response = client.newCall(request).execute();
-                    if (response.code() == 204) code = "complete";
+                    if (response.code() == 204 || response.code() == 200) code = "complete";
                    else if (response.code() == 404) code = "not found";
                    else code = String.valueOf(response.code());
                    return code;
                 }catch (IOException ex) {
-                    Log.e("BUILDINGS", ex.getMessage());
+                    Log.e("Delete", ex.getMessage());
                 }
                 return null;
 
@@ -103,14 +171,14 @@ public class ReservationActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String JsonString) {
 
-            if (JsonString == "complete")
+            if (JsonString.equals("complete") )
             {
                 Toast.makeText(ReservationActivity.this, "Delete completed", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(getBaseContext(), MyReservationActivity.class);
                 intent.putExtra("USER",user);
             }
-            else if (JsonString == "not found")
+            else if (JsonString.equals("not found"))
             {
                 Toast.makeText(ReservationActivity.this, "Delete Failed, Nothing found", Toast.LENGTH_SHORT).show();
             }

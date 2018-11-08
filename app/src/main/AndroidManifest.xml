@@ -28,7 +28,8 @@
         <activity
             android:name=".RoomsActivity"
             android:label="Rooms" />
-        <activity android:name=".BuildingActivity" />
+        <activity android:name=".BuildingActivity"
+           />
         <activity
             android:name=".RoomActivity"
             android:label="@string/AvailableRooms" />

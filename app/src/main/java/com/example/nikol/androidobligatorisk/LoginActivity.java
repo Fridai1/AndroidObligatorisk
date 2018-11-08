@@ -3,7 +3,9 @@ package com.example.nikol.androidobligatorisk;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -23,9 +25,11 @@ import android.view.View;
 
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -47,10 +51,13 @@ public class LoginActivity extends AppCompatActivity  {
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
+    String email;
+    String password;
     private FirebaseAuth mAuth;
-    private Button loginButton;
+    private Boolean rememberMe = false;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,19 +65,40 @@ public class LoginActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mEmailView =  findViewById(R.id.email);
-        loginButton = findViewById(R.id.email_sign_in_button);
+        mPasswordView = (EditText) findViewById(R.id.password);
+        mAuth = FirebaseAuth.getInstance();
 
         Toolbar myToolbar = findViewById(R.id.LoginToolBar);
         setSupportActionBar(myToolbar);
+        ToggleButton rememberMeToggle = findViewById(R.id.RememberMeToggle);
 
-// ...
-// Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
+        rememberMeToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    Log.d("RemeberMeCheck","REMEMBER SET TO TRUE");
+                   rememberMe = true;
+                }
+                else
+                {
+                    Log.d("RemeberMeCheck","REMEMBER SET TO FALSE");
+                    rememberMe = false;
+                }
+
+            }
+        });
+
+
+        SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
+        String GetEmail = getResources().getString(R.string);
+
 
 
     }
+
+
 
     @Override
     public void onStart() {
@@ -137,27 +165,37 @@ public class LoginActivity extends AppCompatActivity  {
         return password.length() > 4;
     }
 
-    private void StartLogin()
+    private void StartLogin(String emailC, String passwordC)
     {
 
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
-        mAuth.signInWithEmailAndPassword(email, password)
+
+
+        mAuth.signInWithEmailAndPassword(emailC, passwordC)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d("", "signInWithEmail:success");
+                            Log.d("Login", "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+
+                            if (rememberMe) {
+                                SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPref.edit();
+                                editor.putString("EMAIL", email);
+                                editor.putString("PASSWORD", password);
+                                editor.apply();
+                            }
+
                             Intent intent = new Intent(getBaseContext(), LoggedInActivity.class);
                             intent.putExtra("USER",user);
                             startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w("", "signInWithEmail:failure", task.getException());
+                            Log.w("Login", "signInWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
+                            finish();
 
                         }
 
@@ -168,8 +206,11 @@ public class LoginActivity extends AppCompatActivity  {
 
     }
 
-    public void Login(View view) {
-        StartLogin();
+    public void Login(View view)
+    {
+        email = mEmailView.getText().toString();
+        password = mPasswordView.getText().toString();
+        StartLogin(email,password);
     }
     }
 

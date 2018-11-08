@@ -6,4 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".SignOutActivity">
 
+    <include layout="@layout/toolbar_main"
+        android:id="@+id/LoginToolBar"/>
+
 </android.support.constraint.ConstraintLayout>

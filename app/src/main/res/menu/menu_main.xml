@@ -5,5 +5,9 @@
     <item android:id="@+id/Signout"
         android:title="@string/Sign_out"
         app:showAsAction="never"/>
+    <item android:id="@+id/ToStart"
+        app:showAsAction="always"
+        android:title="To Start"
+        android:icon="@drawable/left_arrow"/>
 
 </menu>

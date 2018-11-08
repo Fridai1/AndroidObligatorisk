@@ -1,6 +1,7 @@
 package com.example.nikol.androidobligatorisk;
 
 import android.content.Intent;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -22,6 +23,14 @@ FirebaseUser user;
 
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+
+
+        super.onSaveInstanceState(outState, outPersistentState);
+
+    }
+
     public void ToLogin(View view) {
         Intent intent = new Intent(getBaseContext(), LoginActivity.class);
         startActivity(intent);
@@ -33,21 +42,5 @@ FirebaseUser user;
         startActivity(intent);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId())
-        {
-            case R.id.Signout:
-                Intent intent = new Intent(getBaseContext(), SignOutActivity.class);
-                startActivity(intent);
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }
