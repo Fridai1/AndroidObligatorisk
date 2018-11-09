@@ -39,6 +39,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -51,10 +52,12 @@ public class LoginActivity extends AppCompatActivity  {
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    String email;
-    String password;
+    private String email;
+    private String password;
+    private String myPreferences = "MyPref";
     private FirebaseAuth mAuth;
     private Boolean rememberMe = false;
+    SharedPreferences sharedPref;
 
 
 
@@ -71,6 +74,8 @@ public class LoginActivity extends AppCompatActivity  {
         Toolbar myToolbar = findViewById(R.id.LoginToolBar);
         setSupportActionBar(myToolbar);
         ToggleButton rememberMeToggle = findViewById(R.id.RememberMeToggle);
+
+
 
         rememberMeToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -90,9 +95,17 @@ public class LoginActivity extends AppCompatActivity  {
             }
         });
 
+        sharedPref = getSharedPreferences(myPreferences ,Context.MODE_PRIVATE);
 
-        SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
-        String GetEmail = getResources().getString(R.string);
+
+        Map map = sharedPref.getAll();
+
+        if (map.containsKey("EMAIL") || map.containsKey("PASSWORD"))
+        {
+            String email = map.get("EMAIL").toString();
+            String password = map.get("PASSWORD").toString();
+            StartLogin(email,password);
+        }
 
 
 
@@ -180,7 +193,6 @@ public class LoginActivity extends AppCompatActivity  {
                             FirebaseUser user = mAuth.getCurrentUser();
 
                             if (rememberMe) {
-                                SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPref.edit();
                                 editor.putString("EMAIL", email);
                                 editor.putString("PASSWORD", password);

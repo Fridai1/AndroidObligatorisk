@@ -1,6 +1,8 @@
 package com.example.nikol.androidobligatorisk;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -16,6 +18,13 @@ public class SignOutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         user = (FirebaseUser) getIntent().getExtras().get("USER");
         setContentView(R.layout.activity_sign_out);
+
+        SharedPreferences sharedPref = getSharedPreferences("MyPref" ,Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("EMAIL", null);
+        editor.putString("PASSWORD", null);
+        editor.apply();
 
         user = null;
         Intent intent = new Intent(getBaseContext(), StartPageActivity.class);
