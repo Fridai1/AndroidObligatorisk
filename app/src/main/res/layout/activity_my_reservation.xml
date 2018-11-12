@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyReservationActivity">
+    tools:context=".MyReservationActivity"
+    android:orientation="vertical">
 
     <include layout="@layout/toolbar_main"
-        android:id="@+id/LoginToolBar"/>
+        android:id="@+id/MyResToolbar"/>
 
     <ListView
         android:layout_width="match_parent"

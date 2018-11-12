@@ -38,7 +38,8 @@
             android:label="@string/Reservations" />
         <activity android:name=".LoggedInActivity" />
         <activity android:name=".SignOutActivity" />
-        <activity android:name=".MyReservationActivity" />
+        <activity android:name=".MyReservationActivity"
+            android:label="@string/MyReservations"/>
         <activity android:name=".MakeReservationActivity"></activity>
     </application>
 

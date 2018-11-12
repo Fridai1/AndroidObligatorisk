@@ -136,7 +136,13 @@ public class ReservationActivity extends AppCompatActivity {
         public boolean onFling(MotionEvent event1, MotionEvent event2,
                                float velocityX, float velocityY) {
             Log.d(DEBUG_TAG, "onFling: " + event1.toString() + event2.toString());
-            finish();
+
+            boolean RightFling = event1.getX() < event2.getX();
+            Log.d("#FLING", "Fling: " + RightFling);
+            if (RightFling) {
+                finish();
+            }
+
             return true;
         }
     }
@@ -177,6 +183,7 @@ public class ReservationActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(getBaseContext(), MyReservationActivity.class);
                 intent.putExtra("USER",user);
+                startActivity(intent);
             }
             else if (JsonString.equals("not found"))
             {

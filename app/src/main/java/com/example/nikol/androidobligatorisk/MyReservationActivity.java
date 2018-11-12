@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,6 +32,8 @@ public class MyReservationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_reservation);
+        Toolbar myToolbar = findViewById(R.id.MyResToolbar);
+        setSupportActionBar(myToolbar);
 
        user =(FirebaseUser) getIntent().getExtras().get("USER");
        String userId = user.getUid();

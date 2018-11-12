@@ -183,10 +183,16 @@ public class MakeReservationActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(CharSequence charSequence) {
             super.onPostExecute(charSequence);
-            String charseq = charSequence.toString();
+
             Toast.makeText(MakeReservationActivity.this, "Post Success", Toast.LENGTH_SHORT).show();
-            Log.d("MINE", charSequence.toString());
-            finish();
+            Log.d("#MINE", "Posted success");
+           Intent intent = new Intent(getBaseContext(), RoomActivity.class);
+           intent.putExtra("USER", user);
+           intent.putExtra("ROOM", room);
+           intent.putExtra("DAY", Integer.valueOf(day));
+           intent.putExtra("MONTH", Integer.valueOf(month));
+           intent.putExtra("YEAR", Integer.valueOf(year));
+           startActivity(intent);
         }
 
         @Override
@@ -194,7 +200,7 @@ public class MakeReservationActivity extends AppCompatActivity {
             super.onCancelled(charSequence);
 
             Toast.makeText(MakeReservationActivity.this, "Post Failed", Toast.LENGTH_SHORT).show();
-            Log.d("MINE", charSequence.toString());
+            Log.d("#MINE", "POST FAILED");
             finish();
         }
     }
